@@ -14,7 +14,6 @@ import {
 const REGEX = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/g;
 
 export default class RNUrlPreview extends React.PureComponent {
-  _isMounted = false
 
   constructor(props) {
     super(props);
@@ -24,7 +23,6 @@ export default class RNUrlPreview extends React.PureComponent {
       linkDesc: undefined,
       linkFavicon: undefined,
       linkImg: undefined,
-      isLoading: true,
     };
     this.getPreview(props.text);
   }
@@ -62,18 +60,11 @@ export default class RNUrlPreview extends React.PureComponent {
 
 
   componentWillReceiveProps(nextProps) {
-    this._isMounted = true;
     if (nextProps.text !== null) {
       this.getPreview(nextProps.text);
     } else {
-      if (this._isMounted) {
       this.setState({ isUri: false,isLoading:false });
     }
-    }
-  }
-
-  componentWillUnmount() {
-    this._isMounted = false;
   }
 
   _onLinkPressed = () => {
