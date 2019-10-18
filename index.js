@@ -61,7 +61,7 @@ export default class RNUrlPreview extends React.PureComponent {
   };
 
 
-  componentDidMount(nextProps) {
+  componentWillMount(nextProps) {
     this._isMounted = true;
     if (nextProps.text !== null) {
       this.getPreview(nextProps.text);
